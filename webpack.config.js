@@ -3,16 +3,16 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/index.js", // single entry
   output: {
     path: path.join(__dirname, "build"),
-    filename: "[name].[contenthash].js",
+    filename: "[name].[contenthash].js", // hashed bundle file
     publicPath: "/build"
   },
   module: {
     rules: [
       {
-        test: /\.scss$/,
+        test: /\.scss$/, // handle scss
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -26,27 +26,27 @@ module.exports = {
         ]
       },
       {
-        test: /\.js$/,
+        test: /\.js$/, // handle JS files
         exclude: /node_modules/,
         use: "babel-loader"
       },
       {
-        test: /\.jsx?$/,
+        test: /\.jsx?$/, // handle JSX files
         exclude: /node_modules/,
         use: "babel-loader"
       },
       {
-        test: /\.(png|gif|jp(e*)g)$/,
+        test: /\.(png|gif|jp(e*)g)$/, // handle images
         use: {
           loader: "url-loader"
         }
       },
       {
-        test: /\.svg$/,
+        test: /\.svg$/, // handle SVG files
         use: {
           loader: "url-loader",
           options: {
-            limit: 1000000
+            limit: 1000000 // < 1MB return base64 encoded string
           }
         }
       }
@@ -57,8 +57,6 @@ module.exports = {
       title: "Caching"
     }),
     new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
       filename: "[name].css",
       chunkFilename: "[id].css"
     })
