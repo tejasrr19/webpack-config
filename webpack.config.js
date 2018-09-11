@@ -36,6 +36,21 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: "babel-loader"
+      },
+      {
+        test: /\.(png|gif|jp(e*)g)$/,
+        use: {
+          loader: "url-loader"
+        }
+      },
+      {
+        test: /\.svg$/,
+        use: {
+          loader: "url-loader",
+          options: {
+            limit: 1000000
+          }
+        }
       }
     ]
   },
